@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Natillera.Models.Prestamo>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>    
+@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated && (User.Identity.GetUserName().Equals("alex-12-04@hotmail.com")))
+{
+    @Html.ActionLink("Create New", "Create")
+}
+</p>
+@if (Request.IsAuthenticated)
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.usuario.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaInicial)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaFin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Valor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Porcentaje)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.usuario.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaInicial)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaFin)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Valor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Porcentaje)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                </td>
+                @if (Request.IsAuthenticated && (User.Identity.GetUserName().Equals("alex-12-04@hotmail.com")))
+                {
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </td>
+                }
+            </tr>
+        }        
+
+    </table>
+}
